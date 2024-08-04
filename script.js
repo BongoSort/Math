@@ -1,3 +1,3 @@
 document.getElementById('myButton').addEventListener('click', function() {
-  alert('Button clicked!');
+  alert('Knappen blev trykket på!');
 });
