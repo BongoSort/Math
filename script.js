@@ -2,32 +2,20 @@
 let questionText;
 let correctAnswer;
 
-
-
 // Set up the initial question and answer
 document.addEventListener('DOMContentLoaded', (event) => {
+  // Generate a new question
   newQuestion();
+  // Add event listeners to the input field
   document.getElementById('submitButton').addEventListener('click', checkAnswer);
   document.getElementById('answer').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       checkAnswer();
     }
   });
+  // Add event listener to the new question button
   document.getElementById('newQuestionButton').addEventListener('click', newQuestion);
 });
-
-// Handle submit button click
-document.getElementById('submitButton').addEventListener('click', checkAnswer);
-
-// Handle Enter key press in the input field
-document.getElementById('answer').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        checkAnswer();
-    }
-});
-
-// Handle new question button click
-document.getElementById('submitButton').addEventListener('click', newQuestion);
 
 // Function to check the answer
 function checkAnswer() {
