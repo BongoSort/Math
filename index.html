@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matematiksjov</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Velkommen til matematiksjov!</h1>
-    <div id="question">1 + 1 = 
-        <input type="text" id="answer" placeholder="Skriv dit svar">
-    <button id="submitButton">Svar</button>
-    <div id="result"></div>
-    </div>
+    <section class="section">
+        <div class="container">
+            <h1 class="title has-text-centered">Velkommen til matematiksjov!</h1>
+            <div class="box">
+                <div class="field is-grouped is-grouped-centered is-flex is-align-items-center">
+                    <div class="control is-flex is-align-items-center">
+                        <div id="question" class="has-text-centered">1 + 1 =</div>
+                    </div>
+                    <div class="control">
+                        <input class="input is-medium" type="text" id="answer" placeholder="Skriv dit svar">
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary" id="submitButton">Svar</button>
+                    </div>
+                </div>
+                <div class="notification is-primary has-text-centered" id="result"></div>
+                <div class="field is-grouped is-grouped-centered">
+                    <div class="control">
+                        <button class="button is-link" id="newQuestionButton">Ny Spørgsmål</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
-
 </html>
