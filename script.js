@@ -32,6 +32,7 @@ function checkAnswer() {
     resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
     resultDiv.style.color = 'green';
     stampDiv.classList.remove('is-hidden');
+    result.classList.remove('is-hidden');
     // if correct, generate a new question
     newQuestion();
   } else {
