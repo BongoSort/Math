@@ -25,13 +25,19 @@ function checkAnswer() {
   // Get the result div to display the result
   const resultDiv = document.getElementById('result');
 
+  const stampDiv = document.getElementById('stamp');
+
   // Check if the user answer is correct
   if (parseInt(userAnswer) === correctAnswer) {
-      resultDiv.innerHTML = 'Rigtigt!';
-      resultDiv.style.color = 'green';
+    resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
+    resultDiv.style.color = 'green';
+    stampDiv.classList.remove('is-hidden');
+    // if correct, generate a new question
+    newQuestion();
   } else {
-      resultDiv.innerHTML = 'Forkert, prøv igen!';
-      resultDiv.style.color = 'red';
+    resultDiv.innerHTML = `Forkert, ${userAnswer} er ikke det rigtige svar.`;
+    resultDiv.style.color = 'red';
+    stampDiv.classList.add('is-hidden');
   }
 };
 
@@ -44,8 +50,9 @@ function generateQuestion() {
   // Generate a math symbol randomly
   const symbols = ['+', '-'];
   const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+  const eq = '=';
   // Generate the question text
-  return `${num1} ${symbol} ${num2}`;
+  return `${num1} ${symbol} ${num2} ${eq}`;
 }
 
 
@@ -55,7 +62,7 @@ function newQuestion() {
   correctAnswer = generateAnswer();
   document.getElementById('question').textContent = questionText;
   document.getElementById('answer').value = '';
-  document.getElementById('result').innerHTML = '';
+  document.getElementById('stamp').classList.add('is-hidden');
 }
 
 // Calculates the answer based on the question text 

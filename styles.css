@@ -14,3 +14,17 @@ button {
   padding: 10px 20px;
   font-size: 16px;
 }
+
+#stamp {
+  font-size: 2em;
+  margin-top: 10px;
+}
+
+.square-stamp {
+  width: 50px;  /* Adjust size as needed */
+  height: 50px; /* Adjust size as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px; /* Optional: rounded corners */
+}
