@@ -14,62 +14,108 @@
     <section class="section">
       <div class="container">
         <h1 class="title has-text-centered">Velkommen til matematiksjov!</h1>
-        <div class="box">
+        <div class="columns is-flex">
+          <!-- Left side column -->
           <div
-            class="field is-grouped is-grouped-centered is-flex is-align-items-center"
+            class="column is-one-quarter is-flex is-align-items-center is-justify-content-center"
           >
-            <div class="control is-flex is-align-items-center">
-              <div id="question" class="has-text-centered is-size-5"></div>
-            </div>
-            <div class="control">
-              <input
-                class="input is-medium"
-                type="text"
-                id="answer"
-                placeholder="Skriv dit svar"
-              />
-            </div>
-            <div class="control">
-              <button class="button is-primary" id="submitButton">Svar</button>
+            <div class="box has-background-primary">
+              <div class="box">
+                <label class="label">Vælg sværhedsgrad:</label>
+                <div class="control level-radios">
+                  <label class="radio is-block">
+                    <input type="radio" name="levelRadio" value="1" checked />
+                    Level 1
+                  </label>
+                  <label class="radio is-block">
+                    <input type="radio" name="levelRadio" value="2" />
+                    Level 2
+                  </label>
+                  <label class="radio is-block">
+                    <input type="radio" name="levelRadio" value="3" />
+                    Level 3
+                  </label>
+                </div>
+              </div>
+              <div class="box">
+                <label class="label">Vælg hvilke opgaver du vil have:</label>
+                <div class="field">
+                  <div class="control is-">
+                    <label class="checkbox">
+                      <input type="checkbox" value="+" checked />
+                      Plus
+                      <icon class="fas fa-plus"></icon>
+                    </label>
+
+                    <label class="checkbox">
+                      <input type="checkbox" value="-" checked />
+                      Minus
+                      <icon class="fas fa-minus"></icon>
+                    </label>
+
+                    <label class="checkbox">
+                      <input type="checkbox" value="*" />
+                      Gange
+                      <icon class="fas fa-multiply"></icon>
+                    </label>
+
+                    <label class="checkbox">
+                      <input type="checkbox" value="/" />
+                      Dividér <icon class="fas fa-divide"></icon>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div
-            id="result"
-            class="box is-fluid has-text-centered is-size-5 is-hidden"
-          ></div>
-          <div
-            id="stamp"
-            class="notification is-success is-grouped has-text-centered is-hidden square-stamp"
-          >
-            ✔
-          </div>
-          <div class="field is-grouped is-grouped-centered">
-            <div class="control">
-              <button class="button is-link" id="newQuestionButton">
-                Ny Spørgsmål
-              </button>
+          <!-- Right side column -->
+          <div class="column">
+            <div class="box">
+              <div
+                class="field is-grouped is-grouped-centered is-flex is-align-items-center"
+              >
+                <div class="control is-flex is-align-items-center">
+                  <div id="question" class="has-text-centered is-size-5"></div>
+                </div>
+                <div class="control">
+                  <input
+                    class="input is-medium"
+                    type="text"
+                    id="answer"
+                    placeholder="Skriv dit svar"
+                  />
+                </div>
+                <div class="control">
+                  <button class="button is-primary" id="submitButton">
+                    Svar
+                  </button>
+                </div>
+                <div class="field is-grouped is-grouped-centered">
+                  <div class="control">
+                    <button class="button is-primary" id="newQuestionButton">
+                      Nyt Spørgsmål
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="field is-grouped is-grouped-centered">
-            <div class="control"></div>
-          </div>
-          <div class="control">
-            <label class="radio">
-              <input type="radio" name="levelRadio" value="1" checked />
-              Level 1
-            </label>
-            <label class="radio">
-              <input type="radio" name="levelRadio" value="2" />
-              Level 2
-            </label>
-            <label class="radio">
-              <input type="radio" name="levelRadio" value="3" />
-              Level 3
-            </label>
+
+            <div id="result" class="box is-fluid has-text-centered is-size-5">
+              <div
+                id="stamp"
+                class="notification is-success is-grouped has-text-centered square-stamp"
+              >
+                ✔
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/685cae7293.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

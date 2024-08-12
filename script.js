@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 // Function to check the answer
 function checkAnswer() {
+  console.log("checkAnswer called");
   // Get the user input
   const userAnswer = document.getElementById("answer").value;
 
@@ -36,19 +37,22 @@ function checkAnswer() {
   const resultDiv = document.getElementById("result");
 
   const stampDiv = document.getElementById("stamp");
-
+  console.log(
+    "(parseInt(userAnswer) === correctAnswer) " +
+      (parseInt(userAnswer) === correctAnswer)
+  );
   // Check if the user answer is correct
   if (parseInt(userAnswer) === correctAnswer) {
+    // stampDiv.classList.remove("is-hidden");
+    // result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
     resultDiv.style.color = "green";
-    stampDiv.classList.remove("is-hidden");
-    result.classList.remove("is-hidden");
-    // if correct, generate a new question
+    // and then generate a new question
     newQuestion();
   } else {
+    stampDiv.classList.remove("is-hidden");
     resultDiv.innerHTML = `Forkert, ${userAnswer} er ikke det rigtige svar.`;
     resultDiv.style.color = "red";
-    stampDiv.classList.add("is-hidden");
   }
 }
 
@@ -57,7 +61,6 @@ function generateQuestion() {
   const level = document.querySelector(
     'input[name="levelRadio"]:checked'
   ).value;
-  console.log("Hvad er level " + level);
   switch (level) {
     case "1":
       return generateQuestion1();
@@ -196,10 +199,11 @@ function getRndSymbol(symbols) {
 // Function to generate a new question and update the UI
 function newQuestion() {
   questionText = generateQuestion();
+  console.log("questionText " + questionText);
   correctAnswer = resultOfQuestion(questionText);
+  console.log("correctAnswer " + correctAnswer);
   document.getElementById("question").textContent = questionText;
   document.getElementById("answer").value = "";
-  document.getElementById("stamp").classList.add("is-hidden");
 }
 
 // Function to generate a random integer between min and max, both inclusive
