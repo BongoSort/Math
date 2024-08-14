@@ -36,21 +36,19 @@ function checkAnswer() {
   // Get the result div to display the result
   const resultDiv = document.getElementById("result");
 
-  const stampDiv = document.getElementById("stamp");
   console.log(
     "(parseInt(userAnswer) === correctAnswer) " +
       (parseInt(userAnswer) === correctAnswer)
   );
   // Check if the user answer is correct
   if (parseInt(userAnswer) === correctAnswer) {
-    // stampDiv.classList.remove("is-hidden");
-    // result.classList.remove("is-hidden");
+    result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
     resultDiv.style.color = "green";
     // and then generate a new question
     newQuestion();
   } else {
-    stampDiv.classList.remove("is-hidden");
+    result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Forkert, ${userAnswer} er ikke det rigtige svar.`;
     resultDiv.style.color = "red";
   }
