@@ -32,7 +32,9 @@ function checkAnswer() {
   console.log("checkAnswer called");
   // Get the user input
   const userAnswer = document.getElementById("answer").value;
-
+  if (userAnswer.trim() === "") {
+    return;
+  }
   // Get the result div to display the result
   const resultDiv = document.getElementById("result");
 
@@ -51,6 +53,7 @@ function checkAnswer() {
     result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Forkert, ${userAnswer} er ikke det rigtige svar.`;
     resultDiv.style.color = "red";
+    clearInputField();
   }
 }
 
@@ -201,6 +204,11 @@ function newQuestion() {
   correctAnswer = resultOfQuestion(questionText);
   console.log("correctAnswer " + correctAnswer);
   document.getElementById("question").textContent = questionText;
+  clearInputField();
+}
+
+// Function to clear the input field
+function clearInputField() {
   document.getElementById("answer").value = "";
 }
 

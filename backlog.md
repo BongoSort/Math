@@ -7,6 +7,7 @@ vælg sværhedsgrad i radio
 
 Belønning for rigtige svar
 Variation for svar (både rigtige og forkerte)
+Sudden death mode ( 10 rigtige giver reward)
 
 Spørgsmål med flere led, både 1 + 2 + 3 + 4 og evt 1 + 8 / 2 osv
 
