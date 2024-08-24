@@ -9,9 +9,13 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+    />
   </head>
   <body>
-    <section class="section" >
+    <section class="section">
       <div class="container">
         <h1 class="title has-text-centered">Velkommen til matematiksjov!</h1>
         <div class="columns is-flex">
@@ -37,33 +41,33 @@
                   </label>
                 </div>
               </div>
+
               <div class="box">
                 <label class="label">Vælg hvilke opgaver du vil have:</label>
-                <div class="field">
-                  <div class="control is-">
-                    <label class="checkbox">
-                      <input type="checkbox" value="+" checked />
-                      Plus
-                      <icon class="fas fa-plus"></icon>
-                    </label>
 
-                    <label class="checkbox">
-                      <input type="checkbox" value="-" checked />
-                      Minus
-                      <icon class="fas fa-minus"></icon>
-                    </label>
+                <div class="control mathsigns-checkboxes">
+                  <label class="checkbox is-block">
+                    <input type="checkbox" value="+" checked />
+                    Plus
+                    <icon class="fas fa-plus"></icon>
+                  </label>
 
-                    <label class="checkbox">
-                      <input type="checkbox" value="*" />
-                      Gange
-                      <icon class="fas fa-multiply"></icon>
-                    </label>
+                  <label class="checkbox is-block">
+                    <input type="checkbox" value="-" checked />
+                    Minus
+                    <icon class="fas fa-minus"></icon>
+                  </label>
 
-                    <label class="checkbox">
-                      <input type="checkbox" value="/" />
-                      Dividér <icon class="fas fa-divide"></icon>
-                    </label>
-                  </div>
+                  <label class="checkbox is-block">
+                    <input type="checkbox" value="*" />
+                    Gange
+                    <icon class="fas fa-multiply"></icon>
+                  </label>
+
+                  <label class="checkbox is-block">
+                    <input type="checkbox" value="/" />
+                    Dividér <icon class="fas fa-divide"></icon>
+                  </label>
                 </div>
               </div>
             </div>

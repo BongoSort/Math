@@ -1,11 +1,11 @@
 // Variables to store the question text and correct answer
 let questionText;
-let correctAnswer;
 
 // Set up the initial question and answer
 document.addEventListener("DOMContentLoaded", () => {
   // Generate a new question
   newQuestion();
+
   // Add event listeners to the input field
   document
     .getElementById("submitButton")
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         checkAnswer();
       }
     });
+
   // Add event listener to the new question button
   document
     .getElementById("newQuestionButton")
@@ -201,8 +202,13 @@ function getRndSymbol(symbols) {
 // Function to generate a new question and update the UI
 function newQuestion() {
   questionText = generateQuestion();
-  document.getElementById("question").textContent = questionText;
+
+  // Update the question element with the question text
+  document.getElementById("question").innerHTML = questionText;
+
+  // Log the correct answer to the console
   console.log("correctAnswer " + calculateResult(questionText));
+  // Clear the input field
   clearInputField();
 }
 

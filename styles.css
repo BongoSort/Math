@@ -21,27 +21,24 @@ button {
   height: 100vh;
 }
 
-#stamp {
-  font-size: 2em;
-  margin-top: 10px;
-}
-
-.square-stamp {
-  width: 50px;  /* Adjust size as needed */
-  height: 50px; /* Adjust size as needed */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px; /* Optional: rounded corners */
-}
-
 /* Override Bulma default margin for adjacent radio buttons */
-.level-radios .radio + .radio {
+.level-radios .radio {
   margin-left: 0;
   margin-top: 0.5em; /* Add vertical spacing if needed */
 }
 
 /* Optional: Add vertical spacing to all radio buttons */
 .level-radios .radio {
+  margin-bottom: 0.5em;
+}
+
+/* Override Bulma default margin for adjacent radio buttons */
+.mathsigns-checkboxes .checkbox {
+  margin-left: 0;
+  margin-top: 0.5em; /* Add vertical spacing if needed */
+}
+
+/* Optional: Add vertical spacing to all radio buttons */
+.mathsigns-checkboxes .checkbox {
   margin-bottom: 0.5em;
 }
