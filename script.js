@@ -61,6 +61,24 @@ function checkAnswer() {
 
 // Function to generate a random question
 function generateQuestion() {
+  const checkedBoxes = document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+  );
+  const values = [];
+
+  // Loop through NodeList of checked checkboxes and add their values to the array
+  checkedBoxes.forEach((checkbox) => {
+    values.push(checkbox.value);
+  });
+
+  // Make sure the array is not empty
+  if (values.length === 0) {
+    values.push("+");
+  }
+
+  // Print the array of values or do something with it
+  console.log("Checked values: ", values);
+
   const level = document.querySelector(
     'input[name="levelRadio"]:checked'
   ).value;
