@@ -61,24 +61,10 @@ function checkAnswer() {
 
 // Function to generate a random question
 function generateQuestion() {
-  const checkedBoxes = document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-  );
-  const values = [];
+  const operators = getOperators();
+  console.log("operators: ", operators);
 
-  // Loop through NodeList of checked checkboxes and add their values to the array
-  checkedBoxes.forEach((checkbox) => {
-    values.push(checkbox.value);
-  });
-
-  // Make sure the array is not empty
-  if (values.length === 0) {
-    values.push("+");
-  }
-
-  // Print the array of values or do something with it
-  console.log("Checked values: ", values);
-
+  // Get the level of the question
   const level = document.querySelector(
     'input[name="levelRadio"]:checked'
   ).value;
@@ -94,24 +80,56 @@ function generateQuestion() {
   }
 }
 
+// TODO fix for / og *
 // Function to generate a random level 1 question
 function generateQuestion1() {
+  // Get the possible operators
+  const operators = getOperators();
+  console.log("operators: ", operators);
+  // Generate a random math symbol from the chosen operators
+  const operator = getRndOperator(operators);
+  switch (operator) {
+    case "+":
+      question = generateQuestionPlus1();
+    case "-":
+      generateQuestionMinus1();
+    case "*":
+      generateQuestionMultiply1();
+    case "/":
+      generateQuestionDivide1();
+  }
+}
+
+// Function to generate a random level 1 question
+function generateQuestionPlus1() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
-  // Generate a math symbol randomly
-  const symbols = ["+", "-"];
-  const symbol = getRndSymbol(symbols);
-  const eq = "=";
-  // Generate the question text
-  const question = `${num1} ${symbol} ${num2} ${eq}`;
-  // To aviod negative results, we switch the numbers if the result is negative
+
+  return `${num1} + ${num2} =`;
+}
+
+// Function to generate a random level 1 question
+function generateQuestionMinus1() {
+  // Generate a random number between 1 and 10
+  const num1 = getRndInteger(1, 10);
+  // Generate another random number between 1 and 10
+  const num2 = getRndInteger(1, 10);
   if (calculateResult(question) < 0) {
-    return `${num2} ${symbol} ${num1} ${eq}`;
+    return `${num2} - ${num1} =`;
   } else {
-    return question;
+    return `${num1} - ${num2} =`;
   }
+}
+
+function generateQuestionMultiply1() {
+  // Generate a random number between 1 and 10
+  const num1 = getRndInteger(1, 10);
+  // Generate another random number between 1 and 10
+  const num2 = getRndInteger(1, 10);
+
+  return `${num1} * ${num2} =`;
 }
 
 // Function to generate a random level 2 question
@@ -122,7 +140,7 @@ function generateQuestion2() {
   const num2 = getRndInteger(0, 20);
   // Generate a math symbol randomly
   const symbols = ["+", "-"];
-  const symbol = getRndSymbol(symbols);
+  const symbol = getRndOperator(symbols);
   const eq = "=";
   // Generate the question text
   const question = `${num1} ${symbol} ${num2} ${eq}`;
@@ -138,7 +156,7 @@ function generateQuestion2() {
 function generateQuestion3() {
   // Generate a math symbol randomly
   const symbols = ["+", "-", "*", "/"];
-  const symbol = getRndSymbol(symbols);
+  const symbol = getRndOperator(symbols);
   // Generate a random number between 0 and 1
   let num1;
   let num2;
@@ -212,9 +230,9 @@ function calculateResult(question) {
   }
 }
 
-// Function to generate a random index for the symbol
-function getRndSymbol(symbols) {
-  return symbols[Math.floor(Math.random() * symbols.length)];
+// Function to get a random operator fom the list of operators
+function getRndOperator(operators) {
+  return operators[Math.floor(Math.random() * operators.length)];
 }
 
 // Function to generate a new question and update the UI
@@ -238,4 +256,26 @@ function clearInputField() {
 // Function to generate a random integer between min and max, both inclusive
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getOperators() {
+  // Get the checkboxes
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  // Get the values of the checkboxes
+  values = [];
+  // Loop through NodeList of checkboxes and add their values to the array
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      values.push(checkbox.value);
+    }
+  });
+  // Make sure there are at least one mathsign
+  if (values.length === 0) {
+    values.push("+");
+    // Show that the plus checkbox is checked
+    document.getElementById("plus").checked = true;
+  }
+  // Print the array of values or do something with it
+  console.log("Checked values: ", values);
+  return values;
 }
