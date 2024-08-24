@@ -3,7 +3,7 @@ let questionText;
 let correctAnswer;
 
 // Set up the initial question and answer
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
   // Generate a new question
   newQuestion();
   // Add event listeners to the input field
@@ -39,11 +39,12 @@ function checkAnswer() {
   const resultDiv = document.getElementById("result");
 
   console.log(
-    "(parseInt(userAnswer) === correctAnswer) " +
-      (parseInt(userAnswer) === correctAnswer)
+    "(parseInt(userAnswer) === resultOfQuestion(questionText)) " +
+      (parseInt(userAnswer) === calculateResult(questionText))
   );
+
   // Check if the user answer is correct
-  if (parseInt(userAnswer) === correctAnswer) {
+  if (parseInt(userAnswer) === calculateResult(questionText)) {
     result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
     resultDiv.style.color = "green";
@@ -87,7 +88,7 @@ function generateQuestion1() {
   // Generate the question text
   const question = `${num1} ${symbol} ${num2} ${eq}`;
   // To aviod negative results, we switch the numbers if the result is negative
-  if (resultOfQuestion(question) < 0) {
+  if (calculateResult(question) < 0) {
     return `${num2} ${symbol} ${num1} ${eq}`;
   } else {
     return question;
@@ -107,7 +108,7 @@ function generateQuestion2() {
   // Generate the question text
   const question = `${num1} ${symbol} ${num2} ${eq}`;
   // To aviod negative results, we switch the numbers if the result is negative
-  if (resultOfQuestion(question) < 0) {
+  if (calculateResult(question) < 0) {
     return `${num2} ${symbol} ${num1} ${eq}`;
   } else {
     return question;
@@ -157,14 +158,14 @@ function generateQuestion3() {
   // Generate the question text
   const question = `${num1} ${symbol} ${num2} ${eq}`;
   // To aviod negative results, we switch the numbers if the result is negative
-  if (resultOfQuestion(question) < 0) {
+  if (calculateResult(question) < 0) {
     return `${num2} ${symbol} ${num1} ${eq}`;
   } else {
     return question;
   }
 }
 
-function resultOfQuestion(question) {
+function calculateResult(question) {
   // Split the question text based on the space character
   const parts = question.split(" ");
   // Get the first number
@@ -200,10 +201,8 @@ function getRndSymbol(symbols) {
 // Function to generate a new question and update the UI
 function newQuestion() {
   questionText = generateQuestion();
-  console.log("questionText " + questionText);
-  correctAnswer = resultOfQuestion(questionText);
-  console.log("correctAnswer " + correctAnswer);
   document.getElementById("question").textContent = questionText;
+  console.log("correctAnswer " + calculateResult(questionText));
   clearInputField();
 }
 
