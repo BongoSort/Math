@@ -263,42 +263,9 @@ function calculateResult(question) {
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
   // Remove the "=" from the question
-  const questionToEvaluate = trimmedQuestion.replace("=", "");
-  // Split the question string into parts
-  const parts = questionToEvaluate.split(" ");
-  console.log("parts: ", parts);
-  console.log(typeof parts);
-  // count the number of parts, handle sizes of 3 and 5
-  console.log("parts.length: ", parts.length);
-  //   // Get the first number
-  //   const num1 = parseInt(parts[0]);
-  //   // Get the math symbol
-  //   const operator1 = parts[1];
-  //   // Get the second number
-  //   const num2 = parseInt(parts[2]);
-  //   if (parts.length === 3) {
-  //   // Calculate the answer based on the symbol
-  //   switch (operator1) {
-  //     case "+":
-  //       return num1 + num2;
-  //     case "-":
-  //       return num1 - num2;
-  //     case "*":
-  //       return num1 * num2;
-  //     case "/":
-  //       if (num2 === 0) {
-  //         console.error("Unexpected division by zero: ", question);
-  //         return "Error";
-  //       }
-  //       return num1 / num2;
-  //     default:
-  //       console.error("Unknown operator", operator);
-  //       return "Error";
-  //   }
-  // } else {
-  //   const operator2 = parts[3];
-  //   const num3 = parseInt(parts[4]);
-  // }
+  const expression = trimmedQuestion.replace("=", "");
+  // Evaluate the question using the eval function
+  return eval(expression);
 }
 
 // Function to get a random operator fom the list of operators
