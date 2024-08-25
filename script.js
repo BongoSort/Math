@@ -270,46 +270,6 @@ function generateQuestionLevel3Divide() {
   num2 = factors[getRndInteger(0, factors.length - 1)];
   return `${num1} / ${num2} =`;
 }
-//   switch (symbol) {
-//     case "/":
-//       console.log("divi");
-//       // Generate an easy calculatable fraction
-//       num1 = getRndInteger(1, 10);
-//       const factors = [];
-//       for (let i = 1; i <= num1; i++) {
-//         if (num1 % i === 0) {
-//           factors.push(i);
-//         }
-//       }
-//       num2 = factors[getRndInteger(0, factors.length - 1)];
-//       break;
-//     case "*":
-//       console.log("multi");
-//       num1 = getRndInteger(0, 10);
-//       num2 = getRndInteger(0, 10);
-//       break;
-//     case "+":
-//       console.log("plus");
-//       num1 = getRndInteger(1, 25);
-//       num2 = getRndInteger(1, 25);
-//       break;
-//     case "-":
-//       console.log("minus");
-//       num1 = getRndInteger(0, 20);
-//       num2 = getRndInteger(0, 20);
-//       break;
-//   }
-
-//   const eq = "=";
-//   // Generate the question text
-//   const question = `${num1} ${symbol} ${num2} ${eq}`;
-//   // To aviod negative results, we switch the numbers if the result is negative
-//   if (calculateResult(question) < 0) {
-//     return `${num2} ${symbol} ${num1} ${eq}`;
-//   } else {
-//     return question;
-//   }
-// }
 
 // Calculate the result of the question
 function calculateResult(question) {
