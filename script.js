@@ -1,5 +1,4 @@
 // Variables to store the question text and correct answer
-let questionText;
 
 // Set up the initial question and answer
 document.addEventListener("DOMContentLoaded", () => {
@@ -40,14 +39,14 @@ function checkAnswer() {
   const resultDiv = document.getElementById("result");
 
   console.log(
-    "(parseInt(userAnswer) === resultOfQuestion(questionText)) " +
-      (parseInt(userAnswer) === calculateResult(questionText))
+    "(parseInt(userAnswer) === calculateResult()) " +
+      (parseInt(userAnswer) === calculateResult())
   );
 
   // Check if the user answer is correct
-  if (parseInt(userAnswer) === calculateResult(questionText)) {
+  if (parseInt(userAnswer) === calculateResult()) {
     result.classList.remove("is-hidden");
-    resultDiv.innerHTML = `Rigtigt, ${questionText} ${userAnswer}`;
+    resultDiv.innerHTML = `Rigtigt, ${getQuestion()} ${userAnswer}`;
     resultDiv.style.color = "green";
     // and then generate a new question
     newQuestion();
@@ -227,7 +226,7 @@ function generateQuestionLevel3Multiply() {
 // Function to generate a level 1 divide operator question
 function generateQuestionLevel1Divide() {
   // Generate an easy calculatable fraction
-  num1 = getRndInteger(1, 10);
+  const num1 = getRndInteger(1, 10);
   const factors = [];
   for (let i = 1; i <= num1; i++) {
     if (num1 % i === 0) {
@@ -241,7 +240,7 @@ function generateQuestionLevel1Divide() {
 // Function to generate a level 2 divide operator question
 function generateQuestionLevel2Divide() {
   // Generate an calculatable fraction
-  num1 = getRndInteger(0, 20);
+  const num1 = getRndInteger(0, 20);
   const factors = [];
   for (let i = 1; i <= num1; i++) {
     if (num1 % i === 0) {
@@ -255,7 +254,7 @@ function generateQuestionLevel2Divide() {
 // Function to generate a level 3 divide operator question
 function generateQuestionLevel3Divide() {
   // Generate an calculatable fraction
-  num1 = getRndInteger(12, 50);
+  const num1 = getRndInteger(12, 50);
   const factors = [];
   for (let i = 2; i <= num1; i++) {
     if (num1 % i === 0) {
@@ -272,7 +271,8 @@ function generateQuestionLevel3Divide() {
 }
 
 // Calculate the result of the question
-function calculateResult(question) {
+function calculateResult() {
+  const question = getQuestion();
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
   // Remove the "=" from the question
@@ -288,12 +288,10 @@ function getRndOperator(operators) {
 
 // Function to generate a new question and update the UI
 function newQuestion() {
-  questionText = generateQuestion();
-
-  // Update the question element with the question text
-  document.getElementById("question").innerHTML = questionText;
-
-  // Log the correct answer to the console
+  const questionText = generateQuestion();
+  // Set the question text in the UI
+  setQuestion(questionText);
+  // Log the correct answer to the console for now
   console.log("correctAnswer " + calculateResult(questionText));
   // Clear the input field
   clearInputField();
@@ -330,4 +328,12 @@ function getOperators() {
   // Print the array of values or do something with it
   console.log("Checked values: ", values);
   return values;
+}
+
+function getQuestion() {
+  return document.getElementById("question").innerHTML;
+}
+
+function setQuestion(question) {
+  document.getElementById("question").innerHTML = question;
 }
