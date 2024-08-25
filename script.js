@@ -114,7 +114,7 @@ function generateQuestionLevel2() {
   }
 }
 
-// Function to generate a random level 1 question
+// Function to generate a level 1 plus operator question
 function generateQuestionLevel1Plus() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
@@ -123,7 +123,7 @@ function generateQuestionLevel1Plus() {
   return `${num1} + ${num2} =`;
 }
 
-// Function to generate a random level 1 question
+// Function to generate a level 1 minus operator question
 function generateQuestionLevel1Minus() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
@@ -136,6 +136,8 @@ function generateQuestionLevel1Minus() {
     return question;
   }
 }
+
+// Function to generate a level 1 multiply operator question
 function generateQuestionLevel1Multiply() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
@@ -144,6 +146,7 @@ function generateQuestionLevel1Multiply() {
   return `${num1} * ${num2} =`;
 }
 
+// Function to generate a level 1 divide operator question
 function generateQuestionLevel1Divide() {
   // Generate an easy calculatable fraction
   num1 = getRndInteger(1, 10);
@@ -157,6 +160,7 @@ function generateQuestionLevel1Divide() {
   return `${num1} / ${num2} =`;
 }
 
+// Function to generate a level 2 plus operator question
 function generateQuestionLevel2Plus() {
   // Generate a random number between 0 and 20
   const num1 = getRndInteger(0, 20);
@@ -166,6 +170,7 @@ function generateQuestionLevel2Plus() {
   return `${num1} + ${num2} =`;
 }
 
+// Function to generate a level 2 minus operator question
 function generateQuestionLevel2Minus() {
   // Generate a random number between 0 and 20
   const num1 = getRndInteger(0, 20);
@@ -180,6 +185,7 @@ function generateQuestionLevel2Minus() {
   }
 }
 
+// Function to generate a level 2 multiply operator question
 function generateQuestionLevel2Multiply() {
   // Generate a random number between 0 and 10
   const num1 = getRndInteger(0, 10);
@@ -189,6 +195,7 @@ function generateQuestionLevel2Multiply() {
   return `${num1} * ${num2} =`;
 }
 
+// Function to generate a level 2 divide operator question
 function generateQuestionLevel2Divide() {
   // Generate an calculatable fraction
   num1 = getRndInteger(0, 20);
@@ -255,33 +262,43 @@ function generateQuestionLevel2Divide() {
 function calculateResult(question) {
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
-
-  // Split the question text based on the space character
-  const parts = trimmedQuestion.split(" ");
-
-  // Get the first number
-  const num1 = parseInt(parts[0]);
-  // Get the math symbol
-  const operator = parts[1];
-  // Get the second number
-  const num2 = parseInt(parts[2]);
-  // Calculate the answer based on the symbol
-  switch (operator) {
-    case "+":
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "*":
-      return num1 * num2;
-    case "/":
-      if (num2 === 0) {
-        console.error("Unexpected division by zero: ", question);
-        return "Error";
-      }
-      return num1 / num2;
-    default:
-      return "???";
-  }
+  // Remove the "=" from the question
+  const questionToEvaluate = trimmedQuestion.replace("=", "");
+  // Split the question string into parts
+  const parts = questionToEvaluate.split(" ");
+  console.log("parts: ", parts);
+  console.log(typeof parts);
+  // count the number of parts, handle sizes of 3 and 5
+  console.log("parts.length: ", parts.length);
+  //   // Get the first number
+  //   const num1 = parseInt(parts[0]);
+  //   // Get the math symbol
+  //   const operator1 = parts[1];
+  //   // Get the second number
+  //   const num2 = parseInt(parts[2]);
+  //   if (parts.length === 3) {
+  //   // Calculate the answer based on the symbol
+  //   switch (operator1) {
+  //     case "+":
+  //       return num1 + num2;
+  //     case "-":
+  //       return num1 - num2;
+  //     case "*":
+  //       return num1 * num2;
+  //     case "/":
+  //       if (num2 === 0) {
+  //         console.error("Unexpected division by zero: ", question);
+  //         return "Error";
+  //       }
+  //       return num1 / num2;
+  //     default:
+  //       console.error("Unknown operator", operator);
+  //       return "Error";
+  //   }
+  // } else {
+  //   const operator2 = parts[3];
+  //   const num3 = parseInt(parts[4]);
+  // }
 }
 
 // Function to get a random operator fom the list of operators
