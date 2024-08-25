@@ -251,33 +251,34 @@ function generateQuestionLevel2Divide() {
 
 // Function to generate a level 3 divide operator question
 function generateQuestionLevel3Divide() {
-  let loopAvoider = 0;
-  // Generate an calculatable fraction
-  function getCalculatableFraction() {
-    let num1 = getRndInteger(12, 50);
-    const factors = [];
-    for (let i = 2; i <= num1; i++) {
-      if (num1 % i === 0) {
-        factors.push(i);
-      }
-    }
-    // Remove the very easy fractions
-    console.log("factors length: ", factors.length);
-    factors.pop();
-    factors.shift();
-    if (factors.length === 0) {
-      loopAvoider++;
-      if (loopAvoider > 9) {
-        console.log("Warning, loopAvoider > 9");
-        return `1 / 2 =`;
-      }
-      return getCalculatableFraction();
-    } else {
-      num2 = factors[getRndInteger(0, factors.length - 1)];
-      return `${num1} / ${num2} =`;
+  // Generate a calculatable fraction from the number
+  return getCalculatableFractionFromRange(12, 50);
+}
+
+// Function to generate a calculatable fraction from the range given
+function getCalculatableFractionFromRange(from, to, tries = 0) {
+  const num = getRndInteger(from, to);
+  const factors = [];
+  for (let i = 2; i <= num; i++) {
+    if (num % i === 0) {
+      factors.push(i);
     }
   }
-  return getCalculatableFraction();
+  // Remove the very easy fractions
+  console.log("factors length: ", factors.length);
+  factors.pop();
+  factors.shift();
+  if (factors.length === 0) {
+    tries++;
+    if (tries > 9) {
+      console.log("Warning, tries > 9");
+      return `1 / 2 =`;
+    }
+    return getCalculatableFractionFromRange(from, to, tries);
+  } else {
+    num2 = factors[getRndInteger(0, factors.length - 1)];
+    return `${num} / ${num2} =`;
+  }
 }
 
 // Calculate the result of the question
