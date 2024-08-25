@@ -61,9 +61,6 @@ function checkAnswer() {
 
 // Function to generate a random question
 function generateQuestion() {
-  const operators = getOperators();
-  console.log("operators: ", operators);
-
   // Get the level of the question
   const level = document.querySelector(
     'input[name="levelRadio"]:checked'
@@ -74,7 +71,7 @@ function generateQuestion() {
     case "2":
       return generateQuestionLevel2();
     case "3":
-      return generateQuestion3();
+      return generateQuestionLevel3();
     default:
       return generateQuestionLevel1();
   }
@@ -123,7 +120,6 @@ function generateQuestionLevel1Plus() {
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
-
   return `${num1} + ${num2} =`;
 }
 
@@ -212,6 +208,19 @@ function generateQuestionLevel2Multiply() {
   return `${num1} + ${num2} =`;
 }
 
+function generateQuestionLevel2Divide() {
+  // Generate an calculatable fraction
+  num1 = getRndInteger(0, 20);
+  const factors = [];
+  for (let i = 1; i <= num1; i++) {
+    if (num1 % i === 0) {
+      factors.push(i);
+    }
+  }
+  num2 = factors[getRndInteger(0, factors.length - 1)];
+  return `${num1} / ${num2} =`;
+}
+
 // // Function to generate a random level 3 question
 // function generateQuestion3() {
 //   // Generate a math symbol randomly
@@ -265,11 +274,9 @@ function generateQuestionLevel2Multiply() {
 function calculateResult(question) {
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
-  console.log("trimmedQuestion: " + trimmedQuestion);
 
   // Split the question text based on the space character
   const parts = trimmedQuestion.split(" ");
-  console.log("parts: ", parts);
 
   // Get the first number
   const num1 = parseInt(parts[0]);
@@ -287,8 +294,8 @@ function calculateResult(question) {
       return num1 * num2;
     case "/":
       if (num2 === 0) {
-        //TODO: handle division by zero
-        return num1 / 1;
+        console.error("Unexpected division by zero: ", question);
+        return "Error";
       }
       return num1 / num2;
     default:
