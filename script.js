@@ -257,10 +257,15 @@ function generateQuestionLevel3Divide() {
   // Generate an calculatable fraction
   num1 = getRndInteger(12, 50);
   const factors = [];
-  for (let i = 1; i <= num1; i++) {
+  for (let i = 2; i <= num1; i++) {
     if (num1 % i === 0) {
       factors.push(i);
     }
+  }
+  // Remove the very easy fractions
+  factors.pop();
+  if (factors.length === 0) {
+    factors.push(1);
   }
   num2 = factors[getRndInteger(0, factors.length - 1)];
   return `${num1} / ${num2} =`;
