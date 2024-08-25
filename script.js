@@ -240,12 +240,17 @@ function generateQuestionLevel2Divide() {
   // Generate an calculatable fraction
   const num1 = getRndInteger(0, 20);
   const factors = [];
+  // We allow 0 to be the numerator
+  if (num1 === 0) {
+    const num2 = getRndInteger(1, 20);
+    return `${num1} / ${num2} =`;
+  }
   for (let i = 1; i <= num1; i++) {
     if (num1 % i === 0) {
       factors.push(i);
     }
   }
-  num2 = factors[getRndInteger(0, factors.length - 1)];
+  const num2 = factors[getRndInteger(0, factors.length - 1)];
   return `${num1} / ${num2} =`;
 }
 
