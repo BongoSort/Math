@@ -1,5 +1,3 @@
-// Variables to store the question text and correct answer
-
 // Set up the initial question and answer
 document.addEventListener("DOMContentLoaded", () => {
   // Generate a new question
@@ -253,21 +251,33 @@ function generateQuestionLevel2Divide() {
 
 // Function to generate a level 3 divide operator question
 function generateQuestionLevel3Divide() {
+  let loopAvoider = 0;
   // Generate an calculatable fraction
-  const num1 = getRndInteger(12, 50);
-  const factors = [];
-  for (let i = 2; i <= num1; i++) {
-    if (num1 % i === 0) {
-      factors.push(i);
+  function getCalculatableFraction() {
+    let num1 = getRndInteger(12, 50);
+    const factors = [];
+    for (let i = 2; i <= num1; i++) {
+      if (num1 % i === 0) {
+        factors.push(i);
+      }
+    }
+    // Remove the very easy fractions
+    console.log("factors length: ", factors.length);
+    factors.pop();
+    factors.shift();
+    if (factors.length === 0) {
+      loopAvoider++;
+      if (loopAvoider > 9) {
+        console.log("Warning, loopAvoider > 9");
+        return `1 / 2 =`;
+      }
+      return getCalculatableFraction();
+    } else {
+      num2 = factors[getRndInteger(0, factors.length - 1)];
+      return `${num1} / ${num2} =`;
     }
   }
-  // Remove the very easy fractions
-  factors.pop();
-  if (factors.length === 0) {
-    factors.push(1);
-  }
-  num2 = factors[getRndInteger(0, factors.length - 1)];
-  return `${num1} / ${num2} =`;
+  return getCalculatableFraction();
 }
 
 // Calculate the result of the question
