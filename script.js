@@ -70,19 +70,18 @@ function generateQuestion() {
   ).value;
   switch (level) {
     case "1":
-      return generateQuestion1();
+      return generateQuestionLevel1();
     case "2":
-      return generateQuestion2();
+      return generateQuestionLevel2();
     case "3":
       return generateQuestion3();
     default:
-      return generateQuestion1();
+      return generateQuestionLevel1();
   }
 }
 
-// TODO fix for / og *
 // Function to generate a random level 1 question
-function generateQuestion1() {
+function generateQuestionLevel1() {
   // Get the possible operators
   const operators = getOperators();
   console.log("operators: ", operators);
@@ -90,18 +89,36 @@ function generateQuestion1() {
   const operator = getRndOperator(operators);
   switch (operator) {
     case "+":
-      question = generateQuestionPlus1();
+      return generateQuestionLevel1Plus();
     case "-":
-      generateQuestionMinus1();
+      return generateQuestionLevel1Minus();
     case "*":
-      generateQuestionMultiply1();
+      return generateQuestionLevel1Multiply();
     case "/":
-      generateQuestionDivide1();
+      return generateQuestionLevel1Divide();
+  }
+}
+// Function to generate a random level 2 question
+function generateQuestionLevel2() {
+  // Get the possible operators
+  const operators = getOperators();
+  console.log("operators: ", operators);
+  // Generate a random math symbol from the chosen operators
+  const operator = getRndOperator(operators);
+  switch (operator) {
+    case "+":
+      return generateQuestionLevel2Plus();
+    case "-":
+      return generateQuestionLevel2Minus();
+    case "*":
+      return generateQuestionLevel2Multiply();
+    case "/":
+      return generateQuestionLevel2Divide();
   }
 }
 
 // Function to generate a random level 1 question
-function generateQuestionPlus1() {
+function generateQuestionLevel1Plus() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
@@ -111,29 +128,41 @@ function generateQuestionPlus1() {
 }
 
 // Function to generate a random level 1 question
-function generateQuestionMinus1() {
+function generateQuestionLevel1Minus() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
+  const question = `${num1} - ${num2} =`;
   if (calculateResult(question) < 0) {
     return `${num2} - ${num1} =`;
   } else {
-    return `${num1} - ${num2} =`;
+    return question;
   }
 }
-
-function generateQuestionMultiply1() {
+function generateQuestionLevel1Multiply() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
-
   return `${num1} * ${num2} =`;
 }
 
+function generateQuestionLevel1Divide() {
+  // Generate an easy calculatable fraction
+  num1 = getRndInteger(1, 10);
+  const factors = [];
+  for (let i = 1; i <= num1; i++) {
+    if (num1 % i === 0) {
+      factors.push(i);
+    }
+  }
+  num2 = factors[getRndInteger(0, factors.length - 1)];
+  return `${num1} / ${num2} =`;
+}
+
 // Function to generate a random level 2 question
-function generateQuestion2() {
+function generateQuestionLevel2() {
   // Generate a random number between 0 and 20
   const num1 = getRndInteger(0, 20);
   // Generate another random number between 0 and 20
@@ -152,48 +181,20 @@ function generateQuestion2() {
   }
 }
 
-// Function to generate a random level 3 question
-function generateQuestion3() {
-  // Generate a math symbol randomly
-  const symbols = ["+", "-", "*", "/"];
-  const symbol = getRndOperator(symbols);
-  // Generate a random number between 0 and 1
-  let num1;
-  let num2;
-  console.log(getRndInteger(1, 50));
-  switch (symbol) {
-    case "/":
-      console.log("divi");
-      // Generate an easy calculatable fraction
-      num1 = getRndInteger(1, 10);
-      const factors = [];
-      for (let i = 1; i <= num1; i++) {
-        if (num1 % i === 0) {
-          factors.push(i);
-        }
-      }
-      num2 = factors[getRndInteger(0, factors.length - 1)];
-      break;
-    case "*":
-      console.log("multi");
-      num1 = getRndInteger(0, 10);
-      num2 = getRndInteger(0, 10);
-      break;
-    case "+":
-      console.log("plus");
-      num1 = getRndInteger(1, 25);
-      num2 = getRndInteger(1, 25);
-      break;
-    case "-":
-      console.log("minus");
-      num1 = getRndInteger(0, 20);
-      num2 = getRndInteger(0, 20);
-      break;
-  }
-
-  const eq = "=";
+function generateQuestionLevel2Plus() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
   // Generate the question text
-  const question = `${num1} ${symbol} ${num2} ${eq}`;
+  return `${num1} + ${num2} =`;
+}
+
+function generateQuestionLevel2Minus() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
   // To aviod negative results, we switch the numbers if the result is negative
   if (calculateResult(question) < 0) {
     return `${num2} ${symbol} ${num1} ${eq}`;
@@ -202,17 +203,82 @@ function generateQuestion3() {
   }
 }
 
+function generateQuestionLevel2Multiply() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
+  // Generate the question text
+  return `${num1} + ${num2} =`;
+}
+
+// // Function to generate a random level 3 question
+// function generateQuestion3() {
+//   // Generate a math symbol randomly
+//   const symbols = ["+", "-", "*", "/"];
+//   const symbol = getRndOperator(symbols);
+//   // Generate a random number between 0 and 1
+//   let num1;
+//   let num2;
+//   switch (symbol) {
+//     case "/":
+//       console.log("divi");
+//       // Generate an easy calculatable fraction
+//       num1 = getRndInteger(1, 10);
+//       const factors = [];
+//       for (let i = 1; i <= num1; i++) {
+//         if (num1 % i === 0) {
+//           factors.push(i);
+//         }
+//       }
+//       num2 = factors[getRndInteger(0, factors.length - 1)];
+//       break;
+//     case "*":
+//       console.log("multi");
+//       num1 = getRndInteger(0, 10);
+//       num2 = getRndInteger(0, 10);
+//       break;
+//     case "+":
+//       console.log("plus");
+//       num1 = getRndInteger(1, 25);
+//       num2 = getRndInteger(1, 25);
+//       break;
+//     case "-":
+//       console.log("minus");
+//       num1 = getRndInteger(0, 20);
+//       num2 = getRndInteger(0, 20);
+//       break;
+//   }
+
+//   const eq = "=";
+//   // Generate the question text
+//   const question = `${num1} ${symbol} ${num2} ${eq}`;
+//   // To aviod negative results, we switch the numbers if the result is negative
+//   if (calculateResult(question) < 0) {
+//     return `${num2} ${symbol} ${num1} ${eq}`;
+//   } else {
+//     return question;
+//   }
+// }
+
+// Calculate the result of the question
 function calculateResult(question) {
+  // Trim the question string to remove any extra spaces
+  const trimmedQuestion = question.trim();
+  console.log("trimmedQuestion: " + trimmedQuestion);
+
   // Split the question text based on the space character
-  const parts = question.split(" ");
+  const parts = trimmedQuestion.split(" ");
+  console.log("parts: ", parts);
+
   // Get the first number
   const num1 = parseInt(parts[0]);
   // Get the math symbol
-  const symbol = parts[1];
+  const operator = parts[1];
   // Get the second number
   const num2 = parseInt(parts[2]);
   // Calculate the answer based on the symbol
-  switch (symbol) {
+  switch (operator) {
     case "+":
       return num1 + num2;
     case "-":

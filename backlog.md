@@ -19,4 +19,4 @@ Tips og tricks:
 
 håndtér tomme svar
 
-TODO fix stamp
+Skrift udseende skift på tab måske
