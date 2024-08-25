@@ -114,12 +114,47 @@ function generateQuestionLevel2() {
   }
 }
 
+function generateQuestionLevel3() {
+  // Get the possible operators
+  const operators = getOperators();
+  console.log("operators: ", operators);
+  // Generate a random math symbol from the chosen operators
+  const operator = getRndOperator(operators);
+  switch (operator) {
+    case "+":
+      return generateQuestionLevel3Plus();
+    case "-":
+      return generateQuestionLevel3Minus();
+    case "*":
+      return generateQuestionLevel3Multiply();
+    case "/":
+      return generateQuestionLevel3Divide();
+  }
+}
+
 // Function to generate a level 1 plus operator question
 function generateQuestionLevel1Plus() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
+  return `${num1} + ${num2} =`;
+}
+// Function to generate a level 2 plus operator question
+function generateQuestionLevel2Plus() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
+  // Generate the question text
+  return `${num1} + ${num2} =`;
+}
+
+function generateQuestionLevel3Plus() {
+  // Generate a random number between 11 and 50
+  const num1 = getRndInteger(11, 50);
+  // Generate another random number between 11 and 50
+  const num2 = getRndInteger(11, 50);
   return `${num1} + ${num2} =`;
 }
 
@@ -137,12 +172,55 @@ function generateQuestionLevel1Minus() {
   }
 }
 
+// Function to generate a level 2 minus operator question
+function generateQuestionLevel2Minus() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
+  const question = `${num1} - ${num2} =`;
+  // To aviod negative results, we switch the numbers if the result is negative
+  if (calculateResult(question) < 0) {
+    return `${num2} - ${num1} =`;
+  } else {
+    return question;
+  }
+}
+
+function generateQuestionLevel3Minus() {
+  // Generate a random number between 0 and 20
+  const num1 = getRndInteger(0, 20);
+  // Generate another random number between 0 and 20
+  const num2 = getRndInteger(0, 20);
+  // Now we allow negative results
+  return `${num1} - ${num2} =`;
+}
+
 // Function to generate a level 1 multiply operator question
 function generateQuestionLevel1Multiply() {
   // Generate a random number between 1 and 10
   const num1 = getRndInteger(1, 10);
   // Generate another random number between 1 and 10
   const num2 = getRndInteger(1, 10);
+  return `${num1} * ${num2} =`;
+}
+
+// Function to generate a level 2 multiply operator question
+function generateQuestionLevel2Multiply() {
+  // Generate a random number between 0 and 10
+  const num1 = getRndInteger(0, 10);
+  // Generate another random number between 0 and 10
+  const num2 = getRndInteger(0, 10);
+  // Generate the question text
+  return `${num1} * ${num2} =`;
+}
+
+function generateQuestionLevel3Multiply() {
+  // Generate a random number between 0 and 10
+  const num1 = getRndInteger(0, 10);
+  // Generate another random number between 0 and 10
+  const num2 = getRndInteger(11, 20);
+  // Generate the question text
   return `${num1} * ${num2} =`;
 }
 
@@ -160,41 +238,6 @@ function generateQuestionLevel1Divide() {
   return `${num1} / ${num2} =`;
 }
 
-// Function to generate a level 2 plus operator question
-function generateQuestionLevel2Plus() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  // Generate the question text
-  return `${num1} + ${num2} =`;
-}
-
-// Function to generate a level 2 minus operator question
-function generateQuestionLevel2Minus() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  const question = `${num1} - ${num2} =`;
-  // To aviod negative results, we switch the numbers if the result is negative
-  if (calculateResult(question) < 0) {
-    return `${num2} - ${num1} =`;
-  } else {
-    return question;
-  }
-}
-
-// Function to generate a level 2 multiply operator question
-function generateQuestionLevel2Multiply() {
-  // Generate a random number between 0 and 10
-  const num1 = getRndInteger(0, 10);
-  // Generate another random number between 0 and 10
-  const num2 = getRndInteger(0, 10);
-  // Generate the question text
-  return `${num1} * ${num2} =`;
-}
-
 // Function to generate a level 2 divide operator question
 function generateQuestionLevel2Divide() {
   // Generate an calculatable fraction
@@ -209,14 +252,19 @@ function generateQuestionLevel2Divide() {
   return `${num1} / ${num2} =`;
 }
 
-// // Function to generate a random level 3 question
-// function generateQuestion3() {
-//   // Generate a math symbol randomly
-//   const symbols = ["+", "-", "*", "/"];
-//   const symbol = getRndOperator(symbols);
-//   // Generate a random number between 0 and 1
-//   let num1;
-//   let num2;
+// Function to generate a level 3 divide operator question
+function generateQuestionLevel3Divide() {
+  // Generate an calculatable fraction
+  num1 = getRndInteger(12, 50);
+  const factors = [];
+  for (let i = 1; i <= num1; i++) {
+    if (num1 % i === 0) {
+      factors.push(i);
+    }
+  }
+  num2 = factors[getRndInteger(0, factors.length - 1)];
+  return `${num1} / ${num2} =`;
+}
 //   switch (symbol) {
 //     case "/":
 //       console.log("divi");

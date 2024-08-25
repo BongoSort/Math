@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bulma": "^1.0.2",
-    "mathjs": "^13.0.3"
+    "bulma": "^1.0.2"
   }
 }
