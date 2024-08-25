@@ -157,26 +157,6 @@ function generateQuestionLevel1Divide() {
   return `${num1} / ${num2} =`;
 }
 
-// Function to generate a random level 2 question
-function generateQuestionLevel2() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  // Generate a math symbol randomly
-  const symbols = ["+", "-"];
-  const symbol = getRndOperator(symbols);
-  const eq = "=";
-  // Generate the question text
-  const question = `${num1} ${symbol} ${num2} ${eq}`;
-  // To aviod negative results, we switch the numbers if the result is negative
-  if (calculateResult(question) < 0) {
-    return `${num2} ${symbol} ${num1} ${eq}`;
-  } else {
-    return question;
-  }
-}
-
 function generateQuestionLevel2Plus() {
   // Generate a random number between 0 and 20
   const num1 = getRndInteger(0, 20);
@@ -191,21 +171,22 @@ function generateQuestionLevel2Minus() {
   const num1 = getRndInteger(0, 20);
   // Generate another random number between 0 and 20
   const num2 = getRndInteger(0, 20);
+  const question = `${num1} - ${num2} =`;
   // To aviod negative results, we switch the numbers if the result is negative
   if (calculateResult(question) < 0) {
-    return `${num2} ${symbol} ${num1} ${eq}`;
+    return `${num2} - ${num1} =`;
   } else {
     return question;
   }
 }
 
 function generateQuestionLevel2Multiply() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
+  // Generate a random number between 0 and 10
+  const num1 = getRndInteger(0, 10);
+  // Generate another random number between 0 and 10
+  const num2 = getRndInteger(0, 10);
   // Generate the question text
-  return `${num1} + ${num2} =`;
+  return `${num1} * ${num2} =`;
 }
 
 function generateQuestionLevel2Divide() {
@@ -342,6 +323,7 @@ function getOperators() {
       values.push(checkbox.value);
     }
   });
+  console.log("values: ", values);
   // Make sure there are at least one mathsign
   if (values.length === 0) {
     values.push("+");
