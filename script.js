@@ -331,7 +331,7 @@ function getOperators() {
   // Get the checkboxes
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   // Get the values of the checkboxes
-  values = [];
+  let values = [];
   // Loop through NodeList of checkboxes and add their values to the array
   checkboxes.forEach((checkbox) => {
     if (checkbox.checked) {
