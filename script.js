@@ -73,6 +73,8 @@ function generateQuestion() {
       return generateQuestionLevel2();
     case "3":
       return generateQuestionLevel3();
+    case "4":
+      return generateQuestionLevel4();
     default:
       return generateQuestionLevel1();
   }
@@ -133,6 +135,24 @@ function generateQuestionLevel3() {
   }
 }
 
+function generateQuestionLevel4() {
+  // Get the possible operators
+  const operators = getOperators();
+  console.log("operators: ", operators);
+  // Generate a random math symbol from the chosen operators
+  const operator = getRndOperator(operators);
+  switch (operator) {
+    case "+":
+      return generateQuestionLevel4Plus();
+    case "-":
+      return generateQuestionLevel4Minus();
+    case "*":
+      return generateQuestionLevel4Multiply();
+    case "/":
+      return generateQuestionLevel4Divide();
+  }
+}
+
 // Function to generate a level 1 plus operator question
 function generateQuestionLevel1Plus() {
   // Generate a random number between 1 and 10
@@ -157,6 +177,21 @@ function generateQuestionLevel3Plus() {
   // Generate another random number between 11 and 50
   const num2 = getRndInteger(11, 50);
   return `${num1} + ${num2} =`;
+}
+
+function generateQuestionLevel4Plus() {
+  if (getRndInteger(0, 1) == 0) {
+    // Generate a random number between 11 and 100
+    const num1 = getRndInteger(11, 100);
+    // Generate another random number between 11 and 100
+    const num2 = getRndInteger(11, 100);
+    return `${num1} + ${num2} =`;
+  } else {
+    const num1 = getRndInteger(11, 50);
+    const num2 = getRndInteger(11, 50);
+    const num3 = getRndInteger(11, 50);
+    return `${num1} + ${num2} + ${num3} =`;
+  }
 }
 
 // Function to generate a level 1 minus operator question
@@ -197,6 +232,21 @@ function generateQuestionLevel3Minus() {
   return `${num1} - ${num2} =`;
 }
 
+function generateQuestionLevel4Minus() {
+  if (getRndInteger(0, 1) == 0) {
+    // Generate a random number between 0 and 100
+    const num1 = getRndInteger(0, 100);
+    // Generate another random number between 0 and 100
+    const num2 = getRndInteger(0, 100);
+    return `${num1} - ${num2} =`;
+  } else {
+    const num1 = getRndInteger(11, 50);
+    const num2 = getRndInteger(11, 50);
+    const num3 = getRndInteger(11, 50);
+    return `${num1} - ${num2} - ${num3} =`;
+  }
+}
+
 // Function to generate a level 1 multiply operator question
 function generateQuestionLevel1Multiply() {
   // Generate a random number between 1 and 10
@@ -221,6 +271,15 @@ function generateQuestionLevel3Multiply() {
   const num1 = getRndInteger(0, 10);
   // Generate another random number between 0 and 10
   const num2 = getRndInteger(11, 20);
+  // Generate the question text
+  return `${num1} * ${num2} =`;
+}
+
+function generateQuestionLevel4Multiply() {
+  // Generate a random number between 3 and 20
+  const num1 = getRndInteger(3, 20);
+  // Generate another random number between 11 and 20
+  const num2 = getRndInteger(11, 30);
   // Generate the question text
   return `${num1} * ${num2} =`;
 }
@@ -288,6 +347,12 @@ function getCalculatableFractionFromRange(from, to, tries = 0) {
     num2 = factors[getRndInteger(0, factors.length - 1)];
     return `${num} / ${num2} =`;
   }
+}
+
+// Function to generate a level 4 divide operator question
+function generateQuestionLevel4Divide() {
+  // Generate a calculatable fraction from the number
+  return getCalculatableFractionFromRange(12, 100);
 }
 
 // Calculate the result of the question
