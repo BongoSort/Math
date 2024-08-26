@@ -75,6 +75,8 @@ function generateQuestion() {
       return generateQuestionLevel3();
     case "4":
       return generateQuestionLevel4();
+    case "5":
+      return generateQuestionLevel5();
     default:
       return generateQuestionLevel1();
   }
@@ -153,6 +155,28 @@ function generateQuestionLevel4() {
   }
 }
 
+function generateQuestionLevel5() {
+  console.log("generateQuestionLevel5 called");
+  // Get the possible operators
+  const operators = getOperators();
+  // If only a single operator is chosen, generate hard question for that operator
+  if (operators.length == 1) {
+    switch (operators[0]) {
+      case "+":
+        return generateQuestionLevel5Plus();
+      case "-":
+        return generateQuestionLevel5Minus();
+      case "*":
+        return generateQuestionLevel5Multiply();
+      case "/":
+        return generateQuestionLevel5Divide();
+    }
+  } else {
+    // If more operators are chosen, generate a combined operator question
+    return generateQuestionLevel5Mixed();
+  }
+}
+
 // Function to generate a level 1 plus operator question
 function generateQuestionLevel1Plus() {
   // Generate a random number between 1 and 10
@@ -191,6 +215,22 @@ function generateQuestionLevel4Plus() {
     const num2 = getRndInteger(11, 50);
     const num3 = getRndInteger(11, 50);
     return `${num1} + ${num2} + ${num3} =`;
+  }
+}
+
+function generateQuestionLevel5Plus() {
+  if (getRndInteger(0, 1) == 0) {
+    // Generate three random numbers between 11 and 100
+    const num1 = getRndInteger(11, 100);
+    const num2 = getRndInteger(11, 100);
+    const num3 = getRndInteger(11, 100);
+    return `${num1} + ${num2} + ${num3} =`;
+  } else {
+    const num1 = getRndInteger(11, 50);
+    const num2 = getRndInteger(11, 50);
+    const num3 = getRndInteger(11, 50);
+    const num4 = getRndInteger(11, 50);
+    return `${num1} + ${num2} + ${num3} + ${num4} =`;
   }
 }
 
@@ -247,6 +287,22 @@ function generateQuestionLevel4Minus() {
   }
 }
 
+function generateQuestionLevel5Minus() {
+  if (getRndInteger(0, 1) == 0) {
+    // Generate three random numbers between 11 and 100
+    const num1 = getRndInteger(11, 100);
+    const num2 = getRndInteger(11, 100);
+    const num3 = getRndInteger(11, 100);
+    return `${num1} - ${num2} - ${num3} =`;
+  } else {
+    const num1 = getRndInteger(11, 50);
+    const num2 = getRndInteger(11, 50);
+    const num3 = getRndInteger(11, 50);
+    const num4 = getRndInteger(11, 50);
+    return `${num1} - ${num2} - ${num3} - ${num4} =`;
+  }
+}
+
 // Function to generate a level 1 multiply operator question
 function generateQuestionLevel1Multiply() {
   // Generate a random number between 1 and 10
@@ -280,6 +336,15 @@ function generateQuestionLevel4Multiply() {
   const num1 = getRndInteger(3, 20);
   // Generate another random number between 11 and 20
   const num2 = getRndInteger(11, 30);
+  // Generate the question text
+  return `${num1} * ${num2} =`;
+}
+
+function generateQuestionLevel5Multiply() {
+  // Generate a random number between 11 and 50
+  const num1 = getRndInteger(11, 50);
+  // Generate another random number between 11 and 50
+  const num2 = getRndInteger(11, 50);
   // Generate the question text
   return `${num1} * ${num2} =`;
 }
@@ -355,9 +420,36 @@ function generateQuestionLevel4Divide() {
   return getCalculatableFractionFromRange(12, 100);
 }
 
+function generateQuestionLevel5Divide() {
+  // Generate a calculatable fraction from the number
+  return getCalculatableFractionFromRange(17, 120);
+}
+
+// Function to generate a level 5 question with mixed operators
+function generateQuestionLevel5Mixed() {
+  // TODO needs some cleaning up regarding Division
+  console.log("generateQuestionLevel5Mixed called");
+  const operators = getOperators();
+  console.log("operators: ", operators);
+  // Choose a random math symbol from the chosen operators
+  const operator1 = getRndOperator(operators);
+  console.log("operator1: ", operator1);
+  // Choose a random math symbol from the chosen operators
+  const operator2 = getRndOperator(operators);
+  console.log("operator2: ", operator2);
+  const num1 = getRndInteger(11, 50);
+  const num2 = getRndInteger(11, 50);
+  const num3 = getRndInteger(11, 50);
+  console.log(
+    "sanity check: " + `${num1} ${operator1} ${num2} ${operator2} ${num3} =`
+  );
+  return `${num1} ${operator1} ${num2} ${operator2} ${num3} =`;
+}
+
 // Calculate the result of the question
 function calculateResult() {
   const question = getQuestion();
+  console.log("question in calculate result: ", question);
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
   // Remove the "=" from the question
@@ -374,6 +466,7 @@ function getRndOperator(operators) {
 // Function to generate a new question and update the UI
 function newQuestion() {
   const questionText = generateQuestion();
+  console.log("questionText in newQuestion: ", questionText);
   // Set the question text in the UI
   setQuestion(questionText);
   // Log the correct answer to the console for now
@@ -392,6 +485,7 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Function to get the values of the checked checkboxes, guaranteeing at least one math sign
 function getOperators() {
   // Get the checkboxes
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -420,5 +514,7 @@ function getQuestion() {
 }
 
 function setQuestion(question) {
+  console.log("Set Question called");
+  console.log("question in set Q: ", question);
   document.getElementById("question").innerHTML = question;
 }
