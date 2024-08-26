@@ -427,16 +427,17 @@ function generateQuestionLevel5Divide() {
 
 // Function to generate a level 5 question with mixed operators
 function generateQuestionLevel5Mixed() {
-  // TODO needs some cleaning up regarding Division
   console.log("generateQuestionLevel5Mixed called");
-  const operators = getOperators();
+  let operators = getOperators();
   console.log("operators: ", operators);
   // Choose a random math symbol from the chosen operators
   const operator1 = getRndOperator(operators);
   console.log("operator1: ", operator1);
+  operators.splice(operators.indexOf(operator1), 1);
+  console.log("operators Sanity Check: ", operators);
   // Choose a random math symbol from the chosen operators
   const operator2 = getRndOperator(operators);
-  console.log("operator2: ", operator2);
+
   const num1 = getRndInteger(11, 50);
   const num2 = getRndInteger(11, 50);
   const num3 = getRndInteger(11, 50);
@@ -458,6 +459,13 @@ function calculateResult() {
   return eval(expression);
 }
 
+// Function to calculate the result of a fraction
+function calculateFraction(fraction) {
+  const trimmedFraction = fraction.trim();
+  const expression = trimmedFraction.replace("=", "");
+  // Evaluate the question using the eval function
+  return eval(expression);
+}
 // Function to get a random operator fom the list of operators
 function getRndOperator(operators) {
   return operators[Math.floor(Math.random() * operators.length)];

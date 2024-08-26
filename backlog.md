@@ -21,3 +21,7 @@ Tips og tricks:
 Skrift udseende skift på tab måske
 
 Måske fjern "=" fra script og flyt til html ved question input.
+
+Mixed operators:
+Overvej paranteser for num / num * num...
+todo precedence for division
