@@ -23,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('input[name="levelRadio"]').forEach((radio) => {
     radio.addEventListener("change", newQuestion);
   });
+  // Add event listeners to checkboxes to trigger newQuestion on change
+  document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+    checkbox.addEventListener("change", newQuestion);
+  });
 });
 
 // Function to check the answer
