@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 body {
   font-family: Arial, sans-serif;
@@ -42,3 +42,15 @@ button {
 .operators-checkboxes .checkbox {
   margin-bottom: 0.5em;
 }
+
+/* #question {
+  font-size: 2em;
+  color: black;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+
+#question::before {
+  content: attr(data-question);
+  color: black;
+} */

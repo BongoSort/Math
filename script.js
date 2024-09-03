@@ -548,6 +548,14 @@ function getQuestion() {
 
 function setQuestion(question) {
   console.log("Set Question called");
-  console.log("question in set Q: ", question);
-  document.getElementById("question").innerHTML = question;
+  console.log("question in Set Question: ", question);
+  // Format the question (we want more "school friendly" symbols)
+  let formattedQuestion = formatQuestion(question);
+  // Assuming you have a div with id="question"
+  document.getElementById("question").innerHTML = formattedQuestion;
+}
+
+function formatQuestion(question) {
+  // Replace all instances of * with ×
+  return question.replace(/\*/g, "×").replace(/\//g, "÷");
 }
