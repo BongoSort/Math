@@ -494,13 +494,6 @@ function calculateResult(question) {
   return eval(expression);
 }
 
-// Function to calculate the result of a fraction
-function calculateFraction(fraction) {
-  const trimmedFraction = fraction.trim();
-  const expression = trimmedFraction.replace("=", "");
-  // Evaluate the question using the eval function
-  return eval(expression);
-}
 // Function to get a random operator fom the list of operators
 function getRndOperator(operators) {
   return operators[Math.floor(Math.random() * operators.length)];
