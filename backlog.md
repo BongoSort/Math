@@ -2,14 +2,9 @@
 
 ## Ideer
 
-Vælg + - * / i tick box
-vælg sværhedsgrad i radio
-
 Belønning for rigtige svar
 Variation for svar (både rigtige og forkerte)
 Sudden death mode ( 10 rigtige giver reward)
-
-Spørgsmål med flere led, både 1 + 2 + 3 + 4 og evt 1 + 8 / 2 osv
 
 Tips og tricks:
 
@@ -24,3 +19,7 @@ Måske fjern "=" fra script og flyt til html ved question input.
 Mixed operators:
 Overvej paranteser for num / num * num...
 todo precedence for division
+
+## TODOs
+
+rigtige svar kan være 4+-*/-++- i stedet for 4

@@ -553,16 +553,21 @@ function getOperators() {
 }
 
 function getQuestion() {
-  return document.getElementById("question").innerHTML;
+  // Get the question div
+  const questionData = document.getElementById("question").dataset.question;
+  console.log("questionData: ", questionData);
+  return questionData;
 }
 
-function setQuestion(question) {
+function setQuestion(questionTxt) {
   console.log("Set Question called");
-  console.log("question in Set Question: ", question);
+  console.log("question in Set Question: ", questionTxt);
   // Format the question (we want more "school friendly" symbols)
-  let formattedQuestion = formatQuestion(question);
+  let formattedQuestion = formatQuestion(questionTxt);
   // Assuming you have a div with id="question"
   document.getElementById("question").innerHTML = formattedQuestion;
+  // Set the data-question attribute
+  document.getElementById("question").dataset.question = questionTxt;
 }
 
 function formatQuestion(question) {
