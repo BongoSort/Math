@@ -336,47 +336,42 @@ function generateQuestionLevel5Multiply() {
   return generateQuestionMultiply(11, 50);
 }
 
-// Function to generate a level 1 divide operator question
-function generateQuestionLevel1Divide() {
-  // Generate an easy calculatable fraction
-  const num1 = getRndInteger(1, 10);
-  const factors = [];
-  for (let i = 1; i <= num1; i++) {
-    if (num1 % i === 0) {
-      factors.push(i);
-    }
-  }
-  num2 = factors[getRndInteger(0, factors.length - 1)];
-  return `${num1} / ${num2} =`;
-}
-
-// Function to generate a level 2 divide operator question
-function generateQuestionLevel2Divide() {
+function generateQuestionDivideEasy(from, to) {
   // Generate an calculatable fraction
-  const num1 = getRndInteger(0, 20);
+  const num = getRndInteger(from, to);
   const factors = [];
-  // We allow 0 to be the numerator
-  if (num1 === 0) {
-    const num2 = getRndInteger(1, 20);
-    return `${num1} / ${num2} =`;
-  }
   for (let i = 1; i <= num1; i++) {
-    if (num1 % i === 0) {
+    if (num % i === 0) {
       factors.push(i);
     }
   }
-  const num2 = factors[getRndInteger(0, factors.length - 1)];
-  return `${num1} / ${num2} =`;
+  const denom = factors[getRndInteger(0, factors.length - 1)];
+  return `${num} / ${denom} =`;
 }
 
-// Function to generate a level 3 divide operator question
-function generateQuestionLevel3Divide() {
-  // Generate a calculatable fraction from the number
-  return getCalculatableFractionFromRange(12, 50);
+// Function to generate a dynamic divide operator question, includes easy fractions
+function generateQuestionDivideEasy(from, to) {
+  // Generate the numerator
+  const num = getRndInteger(from, to);
+  // If the numerator is zero:
+  if (num === 0) {
+    const denom = getRndInteger(1, to);
+    return `${num} / ${denom} =`;
+  }
+  // Find the factors of the numerator, and choose a random factor as the denominator
+  const factors = [];
+  for (let i = 1; i <= num; i++) {
+    if (num % i === 0) {
+      factors.push(i);
+    }
+  }
+  // Choose a random factor as the denominator
+  const denom = factors[getRndInteger(0, factors.length - 1)];
+  return `${num} / ${denom} =`;
 }
 
-// Function to generate a calculatable fraction from the range given
-function getCalculatableFractionFromRange(from, to, tries = 0) {
+// Function to generate a dynamic divide operator question, removes easy fractions
+function generateQuestionDivideHard(from, to, tries = 0) {
   const num = getRndInteger(from, to);
   const factors = [];
   for (let i = 2; i <= num; i++) {
@@ -385,9 +380,9 @@ function getCalculatableFractionFromRange(from, to, tries = 0) {
     }
   }
   // Remove the very easy fractions
-  console.log("factors length: ", factors.length);
-  factors.pop();
-  factors.shift();
+  factors.pop(); // Removes the number itself
+  factors.shift(); // Removes 1
+  // Check if we have removed all factors, if so, try again, we accidentally found a prime number
   if (factors.length === 0) {
     tries++;
     // If we have tried 10 times, return a warning and a simple fraction, should not happen.
@@ -395,22 +390,38 @@ function getCalculatableFractionFromRange(from, to, tries = 0) {
       console.log("Warning, tries > 9");
       return `1 / 2 =`;
     }
-    return getCalculatableFractionFromRange(from, to, tries);
+    return generateQuestionDivideHard(from, to, tries);
   } else {
-    num2 = factors[getRndInteger(0, factors.length - 1)];
-    return `${num} / ${num2} =`;
+    denom = factors[getRndInteger(0, factors.length - 1)];
+    return `${num} / ${denom} =`;
   }
+}
+
+// Function to generate a level 1 divide operator question
+function generateQuestionLevel1Divide() {
+  return generateQuestionDivideEasy(1, 10);
+}
+
+// Function to generate a level 2 divide operator question
+function generateQuestionLevel2Divide() {
+  return generateQuestionDivideEasy(0, 20);
+}
+
+// Function to generate a level 3 divide operator question
+function generateQuestionLevel3Divide() {
+  // Generate a calculatable fraction from the number
+  return generateQuestionDivideHard(12, 50);
 }
 
 // Function to generate a level 4 divide operator question
 function generateQuestionLevel4Divide() {
   // Generate a calculatable fraction from the number
-  return getCalculatableFractionFromRange(12, 100);
+  return generateQuestionDivideHard(12, 100);
 }
 
 function generateQuestionLevel5Divide() {
   // Generate a calculatable fraction from the number
-  return getCalculatableFractionFromRange(17, 120);
+  return generateQuestionDivideHard(17, 120);
 }
 
 // Function to generate a level 5 question with mixed operators
@@ -440,7 +451,7 @@ function createFirstHalfOfQuestion() {
     case "*":
       return generateQuestionLevel4Multiply();
     case "/":
-      return getCalculatableFractionFromRange(12, 100);
+      return generateQuestionDivideHard(12, 100);
   }
 }
 
