@@ -428,23 +428,50 @@ function generateQuestionLevel5Divide() {
 // Function to generate a level 5 question with mixed operators
 function generateQuestionLevel5Mixed() {
   console.log("generateQuestionLevel5Mixed called");
+  let questionFirstHalf = createFirstHalfOfQuestion();
+  // temp cleanup
+  questionFirstHalf = questionFirstHalf.replace("=", "");
+  console.log("questionFirstHalf: ", questionFirstHalf);
+  const questionSecondhalf = createSecondHalfOfQuestion();
+  console.log("questionSecondhalf: ", questionSecondhalf);
+
+  return `${questionFirstHalf} ${questionSecondhalf}`;
+}
+
+function createFirstHalfOfQuestion() {
   let operators = getOperators();
   console.log("operators: ", operators);
   // Choose a random math symbol from the chosen operators
-  const operator1 = getRndOperator(operators);
-  console.log("operator1: ", operator1);
-  operators.splice(operators.indexOf(operator1), 1);
-  console.log("operators Sanity Check: ", operators);
-  // Choose a random math symbol from the chosen operators
-  const operator2 = getRndOperator(operators);
+  const operator = getRndOperator(operators);
+  console.log("operator: ", operator);
+  switch (operator) {
+    case "+":
+      return generateQuestionLevel4Plus();
+    case "-":
+      return generateQuestionLevel4Minus();
+    case "*":
+      return generateQuestionLevel4Multiply();
+    case "/":
+      return getCalculatableFractionFromRange(12, 100);
+  }
+}
 
-  const num1 = getRndInteger(11, 50);
-  const num2 = getRndInteger(11, 50);
-  const num3 = getRndInteger(11, 50);
-  console.log(
-    "sanity check: " + `${num1} ${operator1} ${num2} ${operator2} ${num3} =`
-  );
-  return `${num1} ${operator1} ${num2} ${operator2} ${num3} =`;
+function createSecondHalfOfQuestion() {
+  let operators = getOperators();
+  console.log("operators: ", operators);
+  // Remove "/" from the operators for easier results
+  operators = operators.filter((operator) => operator !== "/");
+  // Choose a random math symbol from the chosen operators
+  const operator = getRndOperator(operators);
+  console.log("operator: ", operator);
+  switch (operator) {
+    case "+":
+      return `+ ${getRndInteger(1, 10)} =`;
+    case "-":
+      return `- ${getRndInteger(1, 10)} =`;
+    case "*":
+      return `* ${getRndInteger(1, 10)} =`;
+  }
 }
 
 // Calculate the result of the question
