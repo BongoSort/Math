@@ -33,20 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
 function checkAnswer() {
   console.log("checkAnswer called");
   // Get the user input
-  const userAnswer = document.getElementById("answer").value;
-  if (userAnswer.trim() === "") {
+  const userAnswer = document.getElementById("answer").value.trim();
+  // Return if the user answer is empty
+  if (userAnswer === "") {
     return;
   }
   // Get the result div to display the result
   const resultDiv = document.getElementById("result");
 
-  console.log(
-    "(parseInt(userAnswer) === calculateResult(getQuestion())) " +
-      (parseInt(userAnswer) === calculateResult(getQuestion()))
-  );
+  // Calculate the expected correct answer
+  const correctAnswer = calculateResult(getQuestion()).toString();
 
   // Check if the user answer is correct
-  if (parseInt(userAnswer) === calculateResult(getQuestion())) {
+  if (userAnswer === correctAnswer) {
+    console.log("ParseInt(userAnswer)", parseInt(userAnswer));
     result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Rigtigt, ${getQuestion()} ${userAnswer}`;
     resultDiv.style.color = "green";
