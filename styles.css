@@ -42,15 +42,3 @@ button {
 .operators-checkboxes .checkbox {
   margin-bottom: 0.5em;
 }
-
-/* #question {
-  font-size: 2em;
-  color: black;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-}
-
-
-#question::before {
-  content: attr(data-question);
-  color: black;
-} */
