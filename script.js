@@ -294,50 +294,46 @@ function generateQuestionLevel5Minus() {
   }
 }
 
+// Function to generate a dynamic multiply operator question
+// from: the lowest number in the range
+// to: the highest number in the range
+// numOfExps: the number of expressions in the question, default is 1
+function generateQuestionMultiply(from, to, numOfExps = 1) {
+  let question = "";
+  for (i = 0; i <= numOfExps; i++) {
+    question += getRndInteger(from, to);
+    if (i < numOfExps) {
+      question += " * ";
+    } else {
+      question += " =";
+    }
+  }
+  return question;
+}
+
 // Function to generate a level 1 multiply operator question
 function generateQuestionLevel1Multiply() {
-  // Generate a random number between 1 and 10
-  const num1 = getRndInteger(1, 10);
-  // Generate another random number between 1 and 10
-  const num2 = getRndInteger(1, 10);
-  return `${num1} * ${num2} =`;
+  return generateQuestionMultiply(1, 10);
 }
 
 // Function to generate a level 2 multiply operator question
 function generateQuestionLevel2Multiply() {
-  // Generate a random number between 0 and 10
-  const num1 = getRndInteger(0, 10);
-  // Generate another random number between 0 and 10
-  const num2 = getRndInteger(0, 10);
-  // Generate the question text
-  return `${num1} * ${num2} =`;
+  return generateQuestionMultiply(0, 10);
 }
 
+// Function to generate a level 3 multiply operator question
 function generateQuestionLevel3Multiply() {
-  // Generate a random number between 0 and 10
-  const num1 = getRndInteger(0, 10);
-  // Generate another random number between 0 and 10
-  const num2 = getRndInteger(11, 20);
-  // Generate the question text
-  return `${num1} * ${num2} =`;
+  return generateQuestionMultiply(0, 20);
 }
 
+// Function to generate a level 4 multiply operator question
 function generateQuestionLevel4Multiply() {
-  // Generate a random number between 3 and 20
-  const num1 = getRndInteger(3, 20);
-  // Generate another random number between 11 and 20
-  const num2 = getRndInteger(11, 30);
-  // Generate the question text
-  return `${num1} * ${num2} =`;
+  return generateQuestionMultiply(3, 30);
 }
 
+// Function to generate a level 5 multiply operator question
 function generateQuestionLevel5Multiply() {
-  // Generate a random number between 11 and 50
-  const num1 = getRndInteger(11, 50);
-  // Generate another random number between 11 and 50
-  const num2 = getRndInteger(11, 50);
-  // Generate the question text
-  return `${num1} * ${num2} =`;
+  return generateQuestionMultiply(11, 50);
 }
 
 // Function to generate a level 1 divide operator question
@@ -394,6 +390,7 @@ function getCalculatableFractionFromRange(from, to, tries = 0) {
   factors.shift();
   if (factors.length === 0) {
     tries++;
+    // If we have tried 10 times, return a warning and a simple fraction, should not happen.
     if (tries > 9) {
       console.log("Warning, tries > 9");
       return `1 / 2 =`;
