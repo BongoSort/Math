@@ -98,6 +98,8 @@ function generateQuestionLevel1() {
       return generateQuestionLevel1Multiply();
     case "/":
       return generateQuestionLevel1Divide();
+    default:
+      return generateQuestionLevel1Plus();
   }
 }
 // Function to generate a random level 2 question
@@ -116,6 +118,8 @@ function generateQuestionLevel2() {
       return generateQuestionLevel2Multiply();
     case "/":
       return generateQuestionLevel2Divide();
+    default:
+      return generateQuestionLevel2Plus();
   }
 }
 
@@ -134,6 +138,8 @@ function generateQuestionLevel3() {
       return generateQuestionLevel3Multiply();
     case "/":
       return generateQuestionLevel3Divide();
+    default:
+      return generateQuestionLevel3Plus();
   }
 }
 
@@ -152,6 +158,8 @@ function generateQuestionLevel4() {
       return generateQuestionLevel4Multiply();
     case "/":
       return generateQuestionLevel4Divide();
+    default:
+      return generateQuestionLevel4Plus();
   }
 }
 
@@ -170,6 +178,8 @@ function generateQuestionLevel5() {
         return generateQuestionLevel5Multiply();
       case "/":
         return generateQuestionLevel5Divide();
+      default:
+        return generateQuestionLevel5Plus();
     }
   } else {
     // If more operators are chosen, generate a combined operator question
