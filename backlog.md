@@ -17,7 +17,6 @@ Tips og tricks:
 
 * 2 pirater skal dele 10 stykker guld
 
-
 Skrift udseende skift på tab måske
 
 Måske fjern "=" fra script og flyt til html ved question input.

@@ -41,12 +41,12 @@ function checkAnswer() {
   const resultDiv = document.getElementById("result");
 
   console.log(
-    "(parseInt(userAnswer) === calculateResult()) " +
-      (parseInt(userAnswer) === calculateResult())
+    "(parseInt(userAnswer) === calculateResult(getQuestion())) " +
+      (parseInt(userAnswer) === calculateResult(getQuestion()))
   );
 
   // Check if the user answer is correct
-  if (parseInt(userAnswer) === calculateResult()) {
+  if (parseInt(userAnswer) === calculateResult(getQuestion())) {
     result.classList.remove("is-hidden");
     resultDiv.innerHTML = `Rigtigt, ${getQuestion()} ${userAnswer}`;
     resultDiv.style.color = "green";
@@ -177,129 +177,120 @@ function generateQuestionLevel5() {
   }
 }
 
+// Function to generate a dynamic plus operator question
+// from: the lowest number in the range
+// to: the highest number in the range
+// numOfExps: the number of expressions in the question, default is 1
+function generateQuestionPlus(from, to, numOfExps = 1) {
+  let question = "";
+  for (i = 0; i <= numOfExps; i++) {
+    question += getRndInteger(from, to);
+    if (i < numOfExps) {
+      question += " + ";
+    } else {
+      question += " =";
+    }
+  }
+  return question;
+}
+
 // Function to generate a level 1 plus operator question
 function generateQuestionLevel1Plus() {
-  // Generate a random number between 1 and 10
-  const num1 = getRndInteger(1, 10);
-  // Generate another random number between 1 and 10
-  const num2 = getRndInteger(1, 10);
-  return `${num1} + ${num2} =`;
+  return generateQuestionPlus(1, 10);
 }
 // Function to generate a level 2 plus operator question
 function generateQuestionLevel2Plus() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  // Generate the question text
-  return `${num1} + ${num2} =`;
+  return generateQuestionPlus(0, 20);
 }
 
+// Function to generate a level 3 plus operator question
 function generateQuestionLevel3Plus() {
-  // Generate a random number between 11 and 50
-  const num1 = getRndInteger(11, 50);
-  // Generate another random number between 11 and 50
-  const num2 = getRndInteger(11, 50);
-  return `${num1} + ${num2} =`;
+  return generateQuestionPlus(11, 50);
 }
 
+// Function to generate a level 4 plus operator question
 function generateQuestionLevel4Plus() {
   if (getRndInteger(0, 1) == 0) {
-    // Generate a random number between 11 and 100
-    const num1 = getRndInteger(11, 100);
-    // Generate another random number between 11 and 100
-    const num2 = getRndInteger(11, 100);
-    return `${num1} + ${num2} =`;
+    // Generate a question with one expression
+    return generateQuestionPlus(11, 100, 1);
   } else {
-    const num1 = getRndInteger(11, 50);
-    const num2 = getRndInteger(11, 50);
-    const num3 = getRndInteger(11, 50);
-    return `${num1} + ${num2} + ${num3} =`;
+    // Generate a question with two expressions
+    return generateQuestionPlus(11, 50, 2);
   }
 }
 
+// Function to generate a level 5 plus operator question
 function generateQuestionLevel5Plus() {
   if (getRndInteger(0, 1) == 0) {
-    // Generate three random numbers between 11 and 100
-    const num1 = getRndInteger(11, 100);
-    const num2 = getRndInteger(11, 100);
-    const num3 = getRndInteger(11, 100);
-    return `${num1} + ${num2} + ${num3} =`;
+    // Generate a question with two expressions
+    return generateQuestionPlus(11, 100, 2);
   } else {
-    const num1 = getRndInteger(11, 50);
-    const num2 = getRndInteger(11, 50);
-    const num3 = getRndInteger(11, 50);
-    const num4 = getRndInteger(11, 50);
-    return `${num1} + ${num2} + ${num3} + ${num4} =`;
+    // Generate a question with three expressions
+    return generateQuestionPlus(11, 50, 3);
   }
+}
+
+// Function to generate a dynamic minus operator question, that guarantees to be non-negative
+// from: the lowest number in the range
+// to: the highest number in the range
+function generateQuestionMinusEasy(from, to) {
+  const num1 = getRndInteger(from, to);
+  const num2 = getRndInteger(from, to);
+  const question = `${num1} - ${num2} =`;
+  if (calculateResult(question) < 0) {
+    return `${num2} - ${num1} =`;
+  } else {
+    return question;
+  }
+}
+
+// Function to generate a dynamic minus operator question, that can be negative
+// from: the lowest number in the range
+// to: the highest number in the range
+// numOfExps: the number of expressions in the question, default is 1
+function generateQuestionMinus(from, to, numOfExps = 1) {
+  let question = "";
+  for (i = 0; i <= numOfExps; i++) {
+    question += getRndInteger(from, to);
+    if (i < numOfExps) {
+      question += " - ";
+    } else {
+      question += " =";
+    }
+  }
+  return question;
 }
 
 // Function to generate a level 1 minus operator question
 function generateQuestionLevel1Minus() {
-  // Generate a random number between 1 and 10
-  const num1 = getRndInteger(1, 10);
-  // Generate another random number between 1 and 10
-  const num2 = getRndInteger(1, 10);
-  const question = `${num1} - ${num2} =`;
-  if (calculateResult(question) < 0) {
-    return `${num2} - ${num1} =`;
-  } else {
-    return question;
-  }
+  return generateQuestionMinusEasy(1, 10);
 }
 
 // Function to generate a level 2 minus operator question
 function generateQuestionLevel2Minus() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  const question = `${num1} - ${num2} =`;
-  // To aviod negative results, we switch the numbers if the result is negative
-  if (calculateResult(question) < 0) {
-    return `${num2} - ${num1} =`;
-  } else {
-    return question;
-  }
+  return generateQuestionMinusEasy(0, 20);
 }
 
+// Function to generate a level 3 minus operator question
 function generateQuestionLevel3Minus() {
-  // Generate a random number between 0 and 20
-  const num1 = getRndInteger(0, 20);
-  // Generate another random number between 0 and 20
-  const num2 = getRndInteger(0, 20);
-  // Now we allow negative results
-  return `${num1} - ${num2} =`;
+  return generateQuestionMinus(11, 50);
 }
 
+// Function to generate a level 4 minus operator question
 function generateQuestionLevel4Minus() {
   if (getRndInteger(0, 1) == 0) {
-    // Generate a random number between 0 and 100
-    const num1 = getRndInteger(0, 100);
-    // Generate another random number between 0 and 100
-    const num2 = getRndInteger(0, 100);
-    return `${num1} - ${num2} =`;
+    return generateQuestionMinus(0, 100, 1);
   } else {
-    const num1 = getRndInteger(11, 50);
-    const num2 = getRndInteger(11, 50);
-    const num3 = getRndInteger(11, 50);
-    return `${num1} - ${num2} - ${num3} =`;
+    return generateQuestionMinus(11, 50, 2);
   }
 }
 
+// Function to generate a level 5 minus operator question
 function generateQuestionLevel5Minus() {
   if (getRndInteger(0, 1) == 0) {
-    // Generate three random numbers between 11 and 100
-    const num1 = getRndInteger(11, 100);
-    const num2 = getRndInteger(11, 100);
-    const num3 = getRndInteger(11, 100);
-    return `${num1} - ${num2} - ${num3} =`;
+    return generateQuestionMinus(11, 100, 2);
   } else {
-    const num1 = getRndInteger(11, 50);
-    const num2 = getRndInteger(11, 50);
-    const num3 = getRndInteger(11, 50);
-    const num4 = getRndInteger(11, 50);
-    return `${num1} - ${num2} - ${num3} - ${num4} =`;
+    return generateQuestionMinus(11, 50, 3);
   }
 }
 
@@ -475,8 +466,7 @@ function createSecondHalfOfQuestion() {
 }
 
 // Calculate the result of the question
-function calculateResult() {
-  const question = getQuestion();
+function calculateResult(question) {
   console.log("question in calculate result: ", question);
   // Trim the question string to remove any extra spaces
   const trimmedQuestion = question.trim();
