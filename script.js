@@ -555,15 +555,23 @@ function getQuestion() {
 function setQuestion(questionTxt) {
   console.log("Set Question called");
   console.log("question in Set Question: ", questionTxt);
+  // Set the data-question attribute
+  document.getElementById("question").dataset.question = questionTxt;
   // Format the question (we want more "school friendly" symbols)
   let formattedQuestion = formatQuestion(questionTxt);
   // Assuming you have a div with id="question"
   document.getElementById("question").innerHTML = formattedQuestion;
-  // Set the data-question attribute
-  document.getElementById("question").dataset.question = questionTxt;
 }
 
 function formatQuestion(question) {
-  // Replace all instances of * with ×
-  return question.replace(/\*/g, "×").replace(/\//g, "÷");
+  // Replace all instances of operators with unicode symbols
+  const plus = "\u002B"; // Unicode escape for the plus sign
+  const minus = "\u2212"; // Unicode escape for the minus sign
+  const divide = "\u00F7"; // Unicode escape for the divide sign
+  const multiply = "\u00D7"; // Unicode escape for the multiply sign
+  return question
+    .replace(/\*/g, multiply)
+    .replace(/\//g, divide)
+    .replace(/\+/g, plus)
+    .replace(/\-/g, minus);
 }
