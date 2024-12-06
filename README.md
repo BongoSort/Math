@@ -1,32 +1,11 @@
 # Matematiksjov
 
-## Step-by-Step Guide to Set Up a Local Server with Node.js
+Dette er et forsøg på at lave en random matematik generator, så det passer til børn i de mindre klassetrin i folkeskolen
 
-### Install Node.js
+Formålet er i øjeblikket at lege lidt JavaScript og få selve scriptet / math generatoren til at kunne spytte noget brugervenlig matematik ud. 
 
-If you haven’t already, download and install Node.js from nodejs.org. This will also install npm (Node Package Manager).
+Pt er der 5 sværhedsgrader, og brugeren kan selv vælge hvilke typer matematik de vil have genereret; plus, minus, dividér, gange eller en kombination heraf inden for en given sværhedsgrad.
 
-* Open terminal (Command Prompt, PowerShell, or Terminal).
-* Navigate to your project folder:
+Hvis du vil prøve den er det bare at åbne index.html
 
-```console
-cd path/to/your/project
-```
-
-* Initialize a Node.js Project:
-
-```console
-npm init -y
-```
-
-* Install http-server:
-
-```console
-npm install --save-dev http-server
-```
-
-## Start server
-
-```console
-node index.js
-```
+Alt visuel er wip.
